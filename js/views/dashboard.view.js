@@ -1,12 +1,20 @@
+function getRole() {
+  const session = JSON.parse(localStorage.getItem('session'));
+  return session?.role;
+}
+
 export function renderDashboard() {
   const app = document.getElementById('app');
+  const role = getRole();
 
   app.innerHTML = `
     <h1>Dashboard</h1>
-    <p>Home del sistema</p>
+    <p>Role actual: ${role}</p>
 
     <button id="detail-btn">Ver detalle</button>
-    <button id="create-btn">Crear proyecto</button>
+    
+    ${role === 'admin' ? `<button id="create-btn">Crear proyecto</button>`: ''}
+
     <button id="logout-btn">Cerrar sesión</button>
   `;
 
